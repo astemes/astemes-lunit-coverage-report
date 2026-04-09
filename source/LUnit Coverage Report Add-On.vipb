@@ -1,7 +1,7 @@
-<VI_Package_Builder_Settings Version="2020.1" Created_Date="2026-04-07 15:14:41" Modified_Date="2026-04-09 10:30:35" Creator="AntonSundqvist" Comments="" ID="16dff92a2fde500e605ed66b37a408ee">
+<VI_Package_Builder_Settings Version="2020.1" Created_Date="2026-04-07 15:14:41" Modified_Date="2026-04-09 11:31:13" Creator="AntonSundqvist" Comments="" ID="c694a6fcf0252f39a44326f20ca2980e">
   <Library_General_Settings>
     <Package_File_Name>Astemes_lib_LUnit_Coverage_Report_Add_On</Package_File_Name>
-    <Library_Version>1.0.0.28</Library_Version>
+    <Library_Version>1.0.0.29</Library_Version>
     <Auto_Increment_Version>false</Auto_Increment_Version>
     <Library_Source_Folder>..\builds\Coverage Report</Library_Source_Folder>
     <Library_Output_Folder>..\builds</Library_Output_Folder>
