@@ -1,40 +1,45 @@
 # LUnit Coverage Analysis
 
-This LUnit add-on adds coverage analysis to LUnit.
-In LUnit versions prior to 2.0, there was rudimentary coverage analysis functions included in the framework.
-As of version 2.0, these features have been migrated into this new project to allow it to live independently of the main framework.
-The functionality and useabilty was also improved on significantly.
-The add-on also enables report genration using the Cobertura xml format.
+An add-on to [LUnit](https://github.com/astemes/astemes-lunit) that measures VI-level code coverage during test runs and reports the results in the LUnit UI or as a Cobertura XML report for continuous integration.
+- **Measure** VI-level coverage for selected VIs
+- **Reporting** In-IDE result view and/or Cobertura XML
+- **Requires** LabVIEW, LUnit 2.0 or newer, debugging enabled on measured VIs
+- **Install** throug VIPM (stable releases) or GitHub Releases (pre-release builds)
 
 ## Installation
 
-Released versions are available from VIPM and are installed as regular packages.
-Since this is a free standing add-on to LUnit, it requires LUnit to be installed.
-Pre-release versions are available on GitHub and are genereated for each tagged version.
+Stable releases are distributed as VIPM packages and are installed like any other VI Package. Pre-release builds are generated for each tagged version and are available on the [Releases page](https://github.com/astemes/astemes-lunit-coverage-analysis/releases).
 
-Once the add-on is installed, it is activated through the LUnit `Tools->Reporting...` menu.
+Since this is a standalone add-on to LUnit, LUnit must be installed first.
+
+Once installed, the add-on is activated from the LUnit `Tools → Reporting…` menu.
 
 ## Configuration
 
-The add-on allows for configuration of VI:s to measure.
-It is required that the VI:s are configured to have Debugging enabled for the measurement to work.
-In the Reporting configuration dialog, select Configure to open up the configuration dialog.
-In the window, you can select which VI:s you want to measure coverage for and the list is saved as a text file called coverage_include.txt.
-The path to the file is calculated from the location of the test case classes and cannot be changed. 
-This is to ensure that the file can be located even if called from the CLI outside the context of a project.
+Open the Reporting configuration dialog and click **Configure** to select which VIs to measure. The selection is saved as a text file named `coverage_include.txt`.
 
-## Result View
+The location of `coverage_include.txt` is derived from the location of the test case classes and cannot be changed. This ensures the file can be found even when LUnit is invoked from the CLI outside the context of a project.
 
-If enabled from the configuration window, a result view will show the coverage as a percentage for each VI which has been selected for measurement.
-The result view shows a the VI:s in the project tree and VI:s can be opened through double clicking on them.
+> **Note:** VIs must have **Debugging enabled** for coverage measurement to work. This is the most common cause of missing or zero coverage results.
 
-## XML Report
+## Result view
 
-An XML report can be generated using the Cobertura XML format, to be digested by any common continuous integration (CI) system.
-To activate the report format using the [LUnit CLI](https://github.com/astemes/astemes-lunit-cli), you need the add-on installed on the CI runner.
-You then need to pass the report format as a custom report using the LUnit CLI, as described in documentation. 
-Below is an example where the coverage report and the native xml report are both generated into the *c:\logs* directory by passing the arguments `-CustomReports "XML Report,Coverage Report"`.
+When enabled in the configuration dialog, a result view shows coverage as a percentage for each measured VI, laid out in the project tree. VIs can be opened by double-clicking them in the view.
+
+## XML report (CI integration)
+
+The add-on can generate a Cobertura XML report that can be consumed by most common CI systems (Jenkins, GitHub Actions, GitLab CI, and others that support the Cobertura format).
+
+To produce the report from the [LUnit CLI](https://github.com/astemes/astemes-lunit-cli), the add-on must be installed on the CI runner. The coverage report is then passed as a custom report alongside any other reports you want to generate.
+
+The example below generates both the native XML report and the coverage report into `c:\logs`:
 
 ```
 LabVIEWCLI -OperationName LUnit -ProjectPath c:\tests -ReportPath c:\logs -CustomReports "XML Report,Coverage Report"
 ```
+
+See the [LUnit CLI documentation](https://github.com/astemes/astemes-lunit-cli) for the full list of arguments.
+
+## Background
+
+Prior to LUnit 2.0, rudimentary coverage analysis was included in the framework itself. As of 2.0, these features have been migrated into this standalone project so that coverage analysis can evolve independently of the main framework. Functionality and usability were significantly improved in the process, and Cobertura XML output was added.
